@@ -17,16 +17,18 @@
   --violet: #BB80B3;
   --grey: #545454;
 
-  --darkest: #161616;
-  --darker: #212121;
-  --dark: #303030;
+  --darkest: #1e1e1e;
+  --darker: #242424;
+  --dark: #333333;
+  --twilight: #464646;
+  --light-twilight: #646464;
   --light: #EEFFFF;
   --lighter-grey: #E9EAF1;
   --light-grey: #C4C6D4;
-  --accent-color: #80CBC4;
-  --accent-color-darker: #5BA59E;
+  --accent-color: #3e8a3a;
+  --accent-color-darker: #1a5931;
 
-  --panel-foreground: #616161;
+  --panel-foreground: #bebebe;
   --panel-foreground-active: var(--accent-color);
   --panel-foreground-hover: var(--white);
 
@@ -65,10 +67,6 @@ html, body {
   font-size: var(--icon-size) !important;
 }
 
-::placeholder {
-  color: var(--accent-color) !important;
-}
-
 /* Scrollbars */
 ::-webkit-scrollbar-thumb {
   background-color: var(--dark) !important;
@@ -89,7 +87,8 @@ html, body {
 *********************************************************************************/
 
 .sidebar {
-  background-color: var(--darker) !important;
+  color: var(--panel-foreground) !important;
+  background-color: var(--dark) !important;
   text-transform: uppercase;
   font-weight: var(--bolder);
 }
@@ -130,12 +129,22 @@ i.icon-notes {
   color: var(--panel-foreground-hover) !important;
 }
 
+.note-count-label {
+  background-color: var(--twilight) !important;
+  border-radius: 100px !important;
+  color: var(--light-grey) !important;
+  flex: 0 !important;
+  font-size: x-small !important;
+  font-weight: normal !important;
+  padding: 3px 6px 3px 6px !important;
+  margin-left: 3px !important;
+}
+
 /* TAGS */
 
 .tags .list-item-container, 
 .tags .list-item-container:hover {
   display: inline-block;
-  line-height: 0 !important;
   padding: 0 !important;
   height: auto !important;
   background-color: transparent;
@@ -163,8 +172,10 @@ i.icon-notes {
 }
 
 .sidebar > div:last-of-type > button {
-  background-color: var(--accent-color) !important;
-  border: 0px !important;
+  background-color: var(--dark) !important;
+  border-width: 2px !important;
+  border-color: var(--light-twilight) !important;
+  border-radius: 100px !important;
   text-transform: uppercase;
   font-size: var(--font-size) !important;
 }
@@ -174,14 +185,20 @@ i.icon-notes {
 }
 
 .sidebar > div:last-of-type > button > span {
-  color: var(--dark) !important;
+  color: var(--light-twilight) !important;
+  font-weight: bold;
 }
 
 /*********************************************************************************
 * NOTE LIST
 *********************************************************************************/
 
-.note-list {
+.rli-noteList > div:first-of-type > div:first-of-type > div:first-of-type {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
+}
+
+.note-list, .note-list-item {
   background-color: var(--darker) !important;
   border: none !important;
 }
@@ -196,46 +213,70 @@ i.icon-notes {
   border: none !important;
 }
 
-/* BUTTONS SEARCH, SORT NOTES, NEW NOTE AND NEW TASK */
-
-div[height="50"] {
+.rli-noteList div div {
   background-color: var(--darker) !important;
 }
 
-div[height="50"] input {
-  border: none !important;
-  color: var(--accent-color) !important;
-  background-color: var(--darkest) !important;
+/* BUTTONS SEARCH, SORT NOTES, NEW NOTE AND NEW TASK */
+
+div.search-bar div input {
+  border-width: 1px !important;
+  border-radius: 100px !important;
+  border-color: var(--light-twilight) !important;
+  color: var(--panel-foreground) !important;
+  margin-left: 5px !important;
+  background-color: none !important;
 }
 
-div[height="50"] button {
-  background: transparent !important;
-  color: var(--accent-color) !important;
+button.new-note-button {
+  background-color: var(--accent-color) !important;
   border: 0 !important;
+  width: 100px !important;
+}
+
+/* Hide todo button, since I don't use that functionality */
+
+button.new-todo-button {
+  display: none !important;
+}
+
+div.new-note-todo-buttons {
+  width: 100px !important;
 }
 
 div[height="50"] button:hover {
   opacity: var(--opacity-0-8);
 }
 
-div[height="50"] button span {
-  color: var(--accent-color) !important;
+/* Set sort icons and search bar icons to grey, rather than default blue */
+button.sort-order-field-button span, button.sort-order-reverse-button span, span.icon-search,  div.search-bar div button span {
+  color: var(--light-twilight) !important;
+  background-color: none !important;
+}
+
+button.sort-order-field-button, button.sort-order-reverse-button {
+  border: none !important;
+  background-color: var(--darker) !important;
+}
+
+/* Set Notebook icon button to accent color... when it is displayed */
+
+div.rli-editor div div div div button {
+  background-color: var(--accent-color) !important;
 }
 
 /* LIST OF NOTES */
 
 .note-list .list-item-container {
   background-color: var(--darker) !important;
+  border-bottom-width: 1px !important;
+  border-color: var(--dark) !important;
 }
 
 .note-list .list-item-container:hover {
   background-color: var(--darkest) !important;
 }
-
-.item-list.note-list .list-item-container::before {
-  border: none !important;
-}
-
+  
 .note-list .list-item-container a {
   text-transform: initial;
   color: var(--panel-foreground) !important;
@@ -370,7 +411,7 @@ https://discourse.joplinapp.org/t/share-your-css/1730/221 */
 }
 
 .cm-s-material-darker .cm-variable-2.cm-rm-list-token {
-	color: var(--cyan) !important;
+    color: var(--cyan) !important;
 }
 
 /* Links (link) */
@@ -387,7 +428,7 @@ https://discourse.joplinapp.org/t/share-your-css/1730/221 */
 
 /* Comment outside code block */
 pre.CodeMirror-line span.cm-comment {
-	color: var(--white) !important;
+    color: var(--white) !important;
   background-color: none !important;
   border: 0 !important;
 }
@@ -405,7 +446,7 @@ div.CodeMirror span.cm-comment:not(.cm-jn-inline-code) {
 }
 
 div.CodeMirror span.cm-comment.cm-jn-inline-code {
-	background-color: transparent !important;
+    background-color: transparent !important;
 }
 
 /* Horizontal Line */
